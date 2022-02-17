@@ -1,0 +1,37 @@
+{
+ "AWSEBDockerrunVersion": 2,
+ "containerDefinitions": [
+    {
+        "name": "client",
+        "image": "diori/multi-client-10-14",
+        "hostname": "client",
+        "essential": false
+    },
+    {
+        "name": "server",
+        "image": "diori/multi-server-10-14",
+        "hostname": "api",
+        "essential": false
+    },
+    {
+        "name": "worker",
+        "image": "diori/multi-worker-10-14",
+        "hostname": "worker",
+        "essential": false
+    },
+    {
+        "name": "nginx",
+        "image": "diori/multi-nginx-10-14",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 80,
+                "containerPort": 80
+            }
+        ],
+        "links": ["client","server"]
+    }
+
+ ]
+}
